@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Study</title>
+    <meta charset="UTF-8">
+    <title>Main Study Page</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto Condensed">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+    <script src="js/jsPsych/jspsych.js"></script>
+    <script src="js/jsPsych/plugin-preload.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/utility.js"></script>
+    <script src="js/plugin-Gamble.js"></script>
+    <script src="js/plugin-Math.js"></script>
+    <script src="js/plugin-TrustGame.js"></script>
+    <script src="js/plugin-RateEmotion.js"></script>
+    <script src="js/plugin-Compete.js"></script>
+    <script src="js/plugin-CrossBoard.js"></script>
+    <script src="js/plugin-Maze.js"></script>
+    <script src="js/plugin-Info.js"></script>
+    <script src="js/table_maze.js"></script>
+    <script src="js/instruct.js"></script>
+    <script src="js/genConditions.js"></script>
+    <script src="js/studyTimeline.js"></script>
+    <link href="js/jsPsych/jspsych.css" rel="stylesheet" type="text/css" />
+    <link href="css/general.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div id="wrap" class="wrapLong">
+        <div id="msgBox" class="msgBox">
+
+            <h1>Welcome to the study</h1>
+            <p>In this study, you will play some games and answer questions about how you are feeling.</p>
+            <p>With each game you will earn a number of points, which is dependent on your performance.</p>
+            <p>You will have a chance to practice the games you will play in the study.</p>
+            <p>Keyboard with arrow keys are needed for all the games. Please ensure that you have such keys.</p>
+            <p>When you are ready, please click 'Start' button to begin.</p>
+
+        </div>
+        <div id="optionRow" class="optionRow" style="justify-content: space-around;">
+            <button id = 'startButton'>Start</button>
+        </div>
+    </div>
+    <div id='display_element' class='jsPsychDE' style="display: none"></div>
+</body>
+<script>
+    const urlPara = new URLSearchParams(window.location.search)
+
+    document.getElementById('startButton').addEventListener('click', function () {
+        location.href = "instruction.html"+`?tlType=behave`;
+    })
+
+
+</script>
+</html>

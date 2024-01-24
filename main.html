@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Study Page</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto Condensed">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bebas Neue">
+    <script src="js/jsPsych/jspsych.js"></script>
+    <script src="js/jsPsych/plugin-preload.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-auth.js"></script>
+    <script src="js/firebase.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/utility.js"></script>
+    <script src="js/plugin-Gamble.js"></script>
+    <script src="js/plugin-Math.js"></script>
+    <script src="js/plugin-TrustGame.js"></script>
+    <script src="js/plugin-RateEmotion.js"></script>
+    <script src="js/plugin-Compete.js"></script>
+    <script src="js/plugin-CrossBoard.js"></script>
+    <script src="js/plugin-Maze.js"></script>
+    <script src="js/plugin-Info.js"></script>
+    <script src="js/table_maze.js"></script>
+    <script src="js/instruct.js"></script>
+    <script src="js/genConditions.js"></script>
+    <script src="js/studyTimeline.js"></script>
+    <link href="js/jsPsych/jspsych.css" rel="stylesheet" type="text/css" />
+    <link href="css/general.css" rel="stylesheet" type="text/css" />
+</head>
+<style></style>
+<body>
+<div id="wrap" class="wrapLong" style="display: none">
+    <div id="msgBox" class="msgBox"></div>
+    <div id="optionRow" class="optionRow" style="justify-content: space-around;">
+        <button id = 'startButton'>Start</button>
+    </div>
+</div>
+<div id='display_element' class='jsPsychDE' style="display: none"></div>
+</body>
+<script>
+    const urlPara = new URLSearchParams(window.location.search)
+    let PROLIFIC_PID = urlPara.get('PROLIFIC_PID')
+    let tlType;
+    let collectionName = urlPara.get('collectionName')
+    let uploadSuccessfully = false;
+    console.log(PROLIFIC_PID)
+    let sessNum = parseInt( urlPara.get('sessNum') )
+    let complicated = urlPara.get('complicated')
+
+    if (!sessNum) {
+        sessNum = 1;
+    }
+    if (!tlType) {
+        tlType = 'behave'
+    }
+    if (!collectionName) {
+        collectionName = 'p2'
+    }
+    if (!complicated) {
+        complicated = false
+    } else {
+        complicated = complicated==='true'
+    }
+
+    console.log('here',complicated)
+
+
+    if (!PROLIFIC_PID) {
+        document.getElementById('display_element').innerHTML = `
+                        <div id='msgFIN' class="msgBox" style="margin: auto;display: flex; flex-direction: column; justify-content: space-around; align-items: center">
+                            <h1>No Prolific PID detected</h1>
+                            <h2>Please only join via provided Prolific link.</h2>
+                        </div>
+                        `
+    } else {
+        document.getElementById('display_element').innerHTML = `
+                        <div id='msgFIN' class="msgBox" style="margin: auto;display: flex; flex-direction: column; justify-content: space-around; align-items: center">
+                            <h1>Please wait...</h1>
+                            <h2>Experiment is loading... </h2>
+                            <h2>If this screen is taking longer than 5 minutes, please contact the experimenter. </h2>
+                        </div>
+                        `
+    }
+
+    getMazeConfig().then((MazeInfo)=> {
+        if (tlType === 'behave') {
+            document.getElementById('display_element').style.display = 'flex'
+            let jsPsych = initJsPsych({
+                override_safe_mode: true,
+                display_element: 'display_element',
+                MazeInfo: MazeInfo,
+                on_finish: (dt) => {
+
+
+                    let gdt = {};
+                    for (let i=0; i<dt.trials.length; i++) {
+                        gdt[String(i)] = dt.trials[i]
+                    }
+                    document.getElementById('display_element').innerHTML = `
+                        <div id='msgFIN' class="msgBox" style="margin: auto;display: flex; flex-direction: column; justify-content: space-around; align-items: center">
+                            <h1>All done! Thank you for your participation!</h1>
+                            <h2>Please wait and DO NOT CLOSE the browser window, your data is uploading... </h2>
+                        </div>
+                    `
+                    const fdt = {trial: gdt, trialsCompleted:performance.now()}
+                    const status = db.collection(collectionName).doc(PROLIFIC_PID).update(fdt)
+                    status.then(() => {
+                        uploadSuccessfully = true
+                        document.getElementById('display_element').innerHTML = `
+                        <div id='msgFIN' class="msgBox" style="margin: auto;display: flex; flex-direction: column; justify-content: space-around; align-items: center">
+                            <h1>Upload Completed</h1>
+                            <h2>Please wait for your Prolific return code to be retrieved, and you will be redirected back to prolific. </h2>
+                        </div>
+                        `
+                        db.collection('ProlificCode').doc('Code').get().then((code)=>{
+                            let prolificReturnCode = code.data()[collectionName]
+                            console.log(prolificReturnCode)
+                            if (prolificReturnCode) {
+                                setTimeout(function () {
+                                    location.href = `https://app.prolific.com/submissions/complete?cc=${prolificReturnCode}`
+                                },2000)
+                            } else {
+                                document.getElementById('display_element').innerHTML = `
+                                    <div id='msgFIN' class="msgBox" style="margin: auto;display: flex; flex-direction: column; justify-content: space-around; align-items: center">
+                                        <h1>Unable to retrieve code.</h1>
+                                        <h2>Please complete with NO CODE and message the experimenter. </h2>
+                                    </div>
+                                `
+                            }
+
+                        })
+
+
+                    })
+
+                },
+                on_close: () => {
+                    if (!uploadSuccessfully) {
+                        const dt = jsPsych.data.get();
+                        let gdt = {};
+                        for (let i=0; i<dt.trials.length; i++) {
+                            gdt[String(i)] = dt.trials[i]
+                        }
+                        const fdt = {trial: gdt,trialsClosed:performance.now()}
+                        db.collection(collectionName).doc(PROLIFIC_PID).update(fdt)
+                    }
+
+                }
+            });
+
+            let taskProcedure
+            if (complicated) {
+                taskProcedure = fixedContingencyComplicated(MazeInfo);
+            } else {
+                taskProcedure = fixedContingency(MazeInfo);
+            }
+
+
+            const dbCon = db.collection(collectionName).doc(PROLIFIC_PID).get()
+
+            dbCon.then((existDt)=> {
+                console.log(existDt.data())
+                if(!existDt.data()['trial'] || collectionName==='TestBed') {
+                    jsPsych.pluginAPI.clearAllTimeouts()
+                    jsPsych.pluginAPI.cancelAllKeyboardResponses()
+                    jsPsych.run(taskProcedure)
+                } else {
+                    document.getElementById('display_element').innerHTML = `
+                        <div id='msgFIN' class="msgBox" style="margin: auto;display: flex; flex-direction: column; justify-content: space-around; align-items: center">
+                            <h1> Data linked to your Prolific PID already exist.</h1>
+                            <h2> You cannot participate more than once.</h2>
+                            <p> If you believe this is due to an error, please contact
+                            the experimenter via <a href="mailto:jiazhou.chen.20@ucl.ac.uk">EMAIL</a> or Prolific message.
+                            </p>
+                        </div>
+                        `
+                }
+
+            })
+
+        } else {
+            setUpSession(tlType,sessNum,MazeInfo)
+            resetSkipButton()
+            document.getElementById('skipButton').addEventListener('click', () => {
+                sessNum += 1
+                setUpSession(tlType,sessNum,MazeInfo)
+            })
+        }
+
+    })
+
+
+
+
+
+
+
+
+    function setUpSession(tl, num, MazeInfo) {
+        if (num > 3 ) {
+            num = 3
+        }
+        let nStory, nTask, setUpWord;
+        if (num === 0) {
+            setUpWord = `<p>We will start with a quick set up session to get you situated. </p>`
+        } else {
+            setUpWord = ''
+        }
+        switch(tl) {
+            case 'Balanced':
+                nStory = 4;
+                nTask = 2;
+                break;
+            case 'Condensed':
+                nStory = 6;
+                nTask = 2;
+        }
+        document.getElementById('msgBox').innerHTML = `
+            <h1>Session ${num} out of 3</h1>
+            <p>As any other sessions, this session is scheduled to last 120 minutes.</p>
+            <p>In this session, you will listen to ${nStory} stories and play ${nTask} games. </p>
+            `+setUpWord+`
+            <p>When it is ready, the experimenter will let you know when it's time to start. </p>
+            <p>The following information will NOT be displayed for participants:</p>
+            <p>There will be no pause buttons, but you may skip each trial as you wish.</p>
+            <p>There are placeholders screens for breaks and calibration. Use skip button to terminate as you wish.</p>
+        `
+
+        let startButton = document.getElementById("startButton");
+        let new_element;
+        if (startButton) {
+            new_element = startButton.cloneNode(true);
+            startButton.parentNode.replaceChild(new_element, startButton);
+        }
+
+        document.getElementById('startButton').addEventListener('click', ()=> {
+            let [jsPsychXC, taskProcedure] = getTimeline(tl,num,MazeInfo)
+            jsPsychXC.pluginAPI.clearAllTimeouts()
+            jsPsychXC.pluginAPI.cancelAllKeyboardResponses()
+            document.getElementById('display_element').style.display = 'flex'
+            console.log(taskProcedure)
+            jsPsychXC.run(taskProcedure)
+        })
+
+
+    }
+
+</script>
+</html>
