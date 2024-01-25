@@ -389,7 +389,7 @@ function fbMsgBox(task) {
             return  `
                 <h1>Gamble Task - Feedback </h1>
                 <p>After you make a response, you will receive a feedback. </p>
-                <p>You will see three different types of feedbacks <strong style="color: #acdb86">Win</strong>, <strong style="color: #db9a86">Lose</strong> or <strong style="color: #ada89c">Safe</strong>.</p>
+                <p>You will see four different types of feedback <strong style="color: #acdb86">Win</strong>, <strong style="color: #db9a86">Lose</strong> or <strong style="color: #ada89c">Safe</strong>.</p>
                 <p>Below are examples of all possible outcomes.</p>
                 <div style="display: flex; flex-direction: row; justify-content: space-around; padding: 1% 0% 1% 0%; width: 80%; margin: auto;">
                     <div class = 'fbWrap'">
@@ -437,7 +437,7 @@ function fbMsgBox(task) {
             return  `
                 <h1>Trust Task - Feedback </h1>
                 <p>After you make a response, you will receive a feedback. </p>
-                <p>You will see three different types of feedbacks <strong style="color: #acdb86">You Share - Your partner Share</strong>, <strong style="color: #db9a86">You Share - Your Partner Keep</strong> or <strong style="color: #ada89c">You Keep - Your Partner Share/Keep</strong>.</p>
+                <p>You will see four different types of feedback <strong style="color: #acdb86">You Share - Your partner Share</strong>, <strong style="color: #db9a86">You Share - Your Partner Keep</strong> or <strong style="color: #ada89c">You Keep - Your Partner Share/Keep</strong>.</p>
                 <p>Below are examples of all possible outcomes.</p>
                 <div style="display: flex; flex-direction: row; justify-content: space-around; padding: 1% 0% 1% 0%; width: 80%; margin: auto;">
                     <div class = 'fbWrap'">
@@ -486,7 +486,7 @@ function fbMsgBox(task) {
             return  `
                 <h1>Math Task - Feedback </h1>
                 <p>After you make a response, you will receive a feedback. </p>
-                <p>You will see two different types of feedbacks <strong style="color: #acdb86">Correct</strong> or <strong style="color: #db9a86">Incorrect</strong>.</p>
+                <p>You will see three different types of feedback <strong style="color: #acdb86">Correct</strong> or <strong style="color: #db9a86">Incorrect</strong>.</p>
                 <p>Below are examples of all possible outcomes.</p>
                 <div style="display: flex; flex-direction: row; justify-content: space-around; padding: 1% 0% 1% 0%; width: 80%; margin: auto;">
                     <div class = 'fbWrap'">
@@ -524,7 +524,7 @@ function fbMsgBox(task) {
             return  `
                 <h1>Maze Task - Feedback </h1>
                 <p>After you make a response, you will receive a feedback. </p>
-                <p>You will see two different types of feedbacks <strong style="color: #acdb86">ARRIVED AT GIFT</strong> or <strong style="color: #db9a86">DID NOT ARRIVE AT GIFT</strong>.</p>
+                <p>You will see three different types of feedback <strong style="color: #acdb86">ARRIVED AT GIFT</strong> or <strong style="color: #db9a86">DID NOT ARRIVE AT GIFT</strong>.</p>
                 <p>Below are examples of all possible outcomes.</p>
                 <div style="display: flex; flex-direction: row; justify-content: space-around; padding: 1% 0% 1% 0%; width: 80%; margin: auto;">
                     <div class = 'fbWrap'">
@@ -562,7 +562,7 @@ function fbMsgBox(task) {
             return `
                 <h1>Feedback </h1>
                 <p>After you make a response, you will receive a feedback. </p>
-                <p>You will see three different types of feedbacks <strong style="color: #acdb86">Win</strong>, <strong style="color: #db9a86">Lose</strong> points or <strong style="color: #ada89c">No change in points</strong>.</p>
+                <p>You will see four different types of feedback <strong style="color: #acdb86">Win</strong>, <strong style="color: #db9a86">Lose</strong> points or <strong style="color: #ada89c">No change in points</strong>.</p>
                 <p>The top points indicate your actual earning, the bottom indicates what you would have gotten if you chose to do the alternative action.</p>
                 <p>Below are examples of all possible outcomes.</p>
                 <div style="display: flex; flex-direction: row; justify-content: space-around; padding: 1% 0% 1% 0%; width: 80%; margin: auto;">
@@ -620,7 +620,7 @@ function fbMsgBox(task) {
             return `
                 <h1>Feedback </h1>
                 <p>After you make a response, you will receive a feedback. </p>
-                <p>You will see three different types of feedbacks <strong style="color: #acdb86">Win</strong> or <strong style="color: #db9a86">Lose</strong> points.</p>
+                <p>You will see four different types of feedback <strong style="color: #acdb86">Win</strong> or <strong style="color: #db9a86">Lose</strong> points.</p>
                 <p>The top points indicate your actual earning, the bottom indicates what you would have gotten if you chose to do the alternative action.</p>
                 <p>In this task, if you move toward the gift, the alternative is if you had stayed away from it, and vice versa. </p>
                 <p>Below are examples of all possible outcomes.</p>
@@ -770,31 +770,34 @@ function instMsgBox(whatMsg, ifTwist) {
         case 'Trust':
             return `
                 <h1>The Trust Game</h1>
-                <p>You will play with three different partners. Each partner will be identified by a distinctive color.</p>
-                <p>On each trial, you and your partner will be offered same initial points. </p>
+                <p>In each round of this game you will play with one of three different partners. Each partner will be identified by a distinctive color.</p>
+                <p>On each trial, you and your partner will be both be offered the same initial points. </p>
 				<p>Each of you then choose to either SHARE or KEEP.</p>
+                                <p>If you KEEP, you will get the initial points no matter what your partner decides to do. </p>
+				<p>If you SHARE, then your reward will depend on your partner's choice. </p>
 				<p>If you both SHARE, you both get double the initial points.</p>
-                <p>When you KEEP, you will get the initial points. Same for your partner.</p>
-                <p>But if one of you SHAREs but the other KEEPs, then the person who SHAREd gets zero points. The person who KEEPs will still get the initial points. </p>
+                                <p>If you SHARE and your partner KEEPs, then you will get zero points. Your partner will still get the initial points though.</p>
+		<p>We will tell you how frequently each partner has chosen SHARE. </p>
                 <p>Press <strong>'LEFT arrow'</strong> key to SHARE, and <strong>'RIGHT arrow'</strong> key to KEEP. </p>
                 <p>You will have <strong>3 seconds</strong> to make a response. </p>
-				<p>Your partner's responses will be generated by an AI. Each AI has been trained to make choices like one particular person. We will let you know how much the person the AI mimics tended to share. </p>
                 `
         case 'Maze':
             let outM =  `
                 <h1>The Maze Game </h1>
-                <p>In this game, you will be placed at the center of a maze, and your goal is to reach a gift box.</p>
+                <p>In this game, you will be placed at the center of a maze, and your goal is to reach the present.</p>
+		<p> Put a picture of the present here </p>
                 <p>You can use <strong>directional arrow</strong> keys to navigate.</p>
-				<p>However , you will have to navigate 'blind' and you will only see all your movements after time is up. </p>
+				<p>However, you will have to navigate 'blind' and you will only see all your movements after time is up. </p>
                 <p>Each instance of the game is time-limited. You will have more time with larger mazes and less with smaller ones.</p>
-  				<p>The instance will terminate when the time is up or whenever you land on the gift box, whichever is earlier.</p>
-				<p>You earn a large bonus for landing exactly on the gift box.</p>
+  				<p>The instance will terminate when the time is up or when you reach the present, whichever is earlier.</p>
+				<p>You earn a large bonus for reaching the present.</p>
                 `
             if (ifTwist) {
                 outM = outM + `
-                <p>In some mazes however, it is reversed.</p>
-                <p>In these mazes, the gift box is poisonous and you will lose points closer you are to it. You earn most points by staying at the starting point in this case.</p>
-                <p>However, you will not know what kind of maze you are playing. You will have to guess.</p>
+		<br>
+                <p>In some mazes, the present is a trap.</p>
+                <p>In these mazes, you will lose points closer you are to the trap. You earn the most points by getting as far away from the trap as possible.</p>
+                <p>Unfortunately, the trapped presents look the same as normal presents, so you won't know what kind of maze you are playing. You will have to guess.</p>
                 `
             }
             return outM
@@ -825,7 +828,7 @@ function instMsgBox(whatMsg, ifTwist) {
                 <p>We will show you two or three emotions on top and we would like you to find them in the grid below and use your mouse to select them.</p>
                 <p>Once all listed emotions have been selected, you will see the button to continue. </p>
 				<p>Please try to get a good sense of what emotions labels are available and where they are in the grid. </p>
-                <p>At the end of this practice, you will see how the labeling screen is like in the games. </p>
+                <p>At the end of this practice, you will see what the labeling screen looks like. </p>
 			`
         case 'emoTrain2Key':
             return `
@@ -839,7 +842,7 @@ function instMsgBox(whatMsg, ifTwist) {
                 <p>We will show you two or three emotions on top, and we would like you to find them in the grid below and select them.</p>
                 <p>Once all listed emotions have been selected, you may continue by pressing the ENTER key. </p>
 				<p>Please try to get a good sense of what emotions labels are available and where they are in the grid. </p>
-                <p>At the end of this practice, you will see how the labeling screen is like in the games. </p>
+                <p>At the end of this practice, you will see what the labeling screen looks like. </p>
 			`
         case 'fin':
             return `
