@@ -826,7 +826,7 @@ function instMsgBox(whatMsg, ifTwist) {
                 <p>We will show you two or three emotions on top and we would like you to find them in the grid below and use your mouse to select them.</p>
                 <p>Once all listed emotions have been selected, you will see the button to continue. </p>
 				<p>Please try to get a good sense of what emotions labels are available and where they are in the grid. </p>
-                <p>At the end of this practice, you will see how the labeling screen is like in the games. </p>
+                <p>At the end of this practice, you will see what the labeling screen looks like. </p>
 			`
         case 'emoTrain2Key':
             return `
@@ -840,7 +840,7 @@ function instMsgBox(whatMsg, ifTwist) {
                 <p>We will show you two or three emotions on top, and we would like you to find them in the grid below and select them.</p>
                 <p>Once all listed emotions have been selected, you may continue by pressing the ENTER key. </p>
 				<p>Please try to get a good sense of what emotions labels are available and where they are in the grid. </p>
-                <p>At the end of this practice, you will see how the labeling screen is like in the games. </p>
+                <p>At the end of this practice, you will see what the labeling screen looks like. </p>
 			`
         case 'fin':
             return `
