@@ -354,6 +354,11 @@ var jsPsychMaze = (function (jspsych) {
         }
 
         moveSeq(curPos,trial,seq) {
+            if (trial.reverse===true) {
+                document.getElementById('mzPrize').textContent = '💀'
+                document.getElementById('mzPrize').style.backgroundColor = '#5a4a78'
+                document.getElementById('mzPrize').style.borderColor = '#341a63'
+            }
             return new Promise(async (resolve)=>{
                 let validSteps = 0;
                 if (seq.length < 1) {
@@ -459,39 +464,61 @@ var jsPsychMaze = (function (jspsych) {
         endMaze(trial) {
             const veil = document.getElementById('veil')
 
-            let aniCon, uChoice, uPoints, cfChoice, cfPoints,bgColor,cSn
+            let aniCon, uChoice, uPoints, cfChoice ,bgColor, cSn
             let noResp = false;
-            let [totalScore, ifBbox] = mazeScore(
-                trial.preset.c1Pos, trial.endPos, trial.preset.prizePos,
-                trial.preset.cells_h,trial.validSteps, trial.residualTime, trial.reverse)
+            const endPos = trial.endPos;
+            const prizePos = trial.preset.prizePos;
+            const initPos = trial.preset.c1Pos;
+
+            const ifBox = (endPos[0] === prizePos[0] && endPos[1] === prizePos[1]);
+            const initDist = pythagoreanC( (prizePos[0] - initPos[0]), (prizePos[1] - initPos[1]));
+            const endDist = pythagoreanC( (prizePos[0] - endPos[0]), (prizePos[1] - endPos[1]) )
+            const travelDist = pythagoreanC((endPos[0] - initPos[0]), (endPos[1] - initPos[1]))
+            let cfEnd = [
+                initPos[0] - (endPos[0] - initPos[0]),
+                initPos[1] - (endPos[1] - initPos[1])
+            ]
+            for (let i in [0,1]) {
+                if (cfEnd[i] < 0) {
+                    cfEnd[i] = Math.abs(cfEnd[i]) + trial.preset.cells_h
+                }
+            }
+            let cfDist = pythagoreanC((prizePos[0] - cfEnd[0]), (prizePos[1] - cfEnd[1]))
+            let cfifBox = false
+            if (cfDist > initDist && !ifBox && !trial.reverse) {
+                cfEnd = prizePos
+                cfDist = 0
+                cfifBox = true
+            }
+            console.log(`Init Pos:',${initPos}, 'End Pos': ${endPos}, 'Gift Pos': ${prizePos}, 'CF Pos: ${cfEnd}`)
+            let [totalScore, ifBbox] = mazeScore(initDist, endDist, travelDist, ifBox, trial.reverse)
+            let cfPoints = mazeScore(initDist, cfDist, travelDist, cfifBox, trial.reverse)
 
             if (ifBbox > 0) {
                 aniCon = [
                     {scale:0.9},
                     {scale:2},
                 ]
-                cSn = 0
-                uChoice = 'Gift Box'
-                cfChoice = 'Nothing'
-                cfPoints = mazeScore(
-                    trial.preset.c1Pos, trial.preset.c1Pos, trial.preset.prizePos,
-                    trial.preset.cells_h,trial.validSteps, trial.residualTime, trial.reverse)
             } else {
                 aniCon = [
                     {opacity:'100%'},
                     {opacity: '0%'}
                 ]
-                uChoice = 'Nothing'
-                cfChoice = 'Gift Box'
-                cfPoints = mazeScore(
-                    trial.preset.c1Pos,  trial.preset.prizePos, trial.preset.prizePos,
-                    trial.preset.cells_h,trial.validSteps, trial.residualTime, trial.reverse)
-                cSn = 1
             }
+
+            if (totalScore > 0) {
+                cSn = 0
+            } else if (totalScore <0) {
+                cSn = 1
+            } else if (totalScore = 0) {
+                cSn = 2
+            }
+
 
             if (trial.preset.c1Pos[0] === trial.endPos[0] && trial.preset.c1Pos[1] === trial.endPos[1]) {
                 noResp = true
-                totalScore = 0
+                totalScore = -10
+                cfPoints = 10
                 cSn = 3
             }
 
@@ -564,29 +591,42 @@ function genMaze(MzPreset,wrapName) {
 
 }
 
-function mazeScore(initPos, endPos, prizePos, mzSize, validStep, residualTime,reverse) {
-    console.log(`init:',${initPos}, 'end': ${endPos}, 'prize': ${prizePos}`)
+function mazeScore(initDist, endDist, travelDist, ifBox,reverse) {
+    console.log('Maze Score Calculation Version 2')
+
     if (!reverse) {
         reverse = false
     }
-    if (!residualTime) {residualTime = 0}
-    const ifBox = (endPos[0] === prizePos[0] && endPos[1] === prizePos[1]);
 
-    const initDist = pythagoreanC( (prizePos[0] - initPos[0]), (prizePos[1] - initPos[1]));
-    const endDist = pythagoreanC( (prizePos[0] - endPos[0]), (prizePos[1] - endPos[1]) )
-    const travelDist = pythagoreanC((endPos[0] - initPos[0]), (endPos[1] - initPos[1]))
 
-    console.log(`ifBox: ${ifBox}, initial distance: ${initDist}, ending distance: ${endDist}, 
-    traveled distance: ${travelDist},`)
+    console.log(`Reached Box: ${ifBox}, Initial Distance: ${initDist}, Ending Distance: ${endDist}, 
+    Traveled Distance: ${travelDist},`)
 
     // total score is equal to the distance traveled and distance to the prize and prize winning
     let totalScore;
-    if (reverse) {
-        totalScore = Math.round(((( (initDist - endDist + travelDist) - (ifBox*initDist))/(mzSize))  * 4) )
+    if (reverse === false) {
+        console.log('regular calculation')
+        // in regular cases, max point is 10, closer to box grants some points
+        totalScore = ((initDist - endDist) / (initDist) * 5) + (ifBox*5)
     } else {
-        totalScore = Math.round(((( (initDist - travelDist + endDist) + (ifBox*initDist))/(mzSize))  * 4) + (residualTime * 0.2))
+        console.log('reverse calculation')
+        // in reverse cases, max point is 10, min point is -10, let's be discrete and just split it into two cases:
+        if (endDist <= initDist) {
+            // in this case they got closer to the trap & get -5 for reaching it
+            totalScore = ((endDist-initDist) / (initDist) * 5) + (ifBox*-5)
+        } else {
+            let soFar = 0;
+            // in this case they ran away:
+            if (travelDist >= initDist) {
+                // if they ran so far that it was further than the og pos and gift they get a bonus
+                soFar = 1;
+                travelDist = initDist
+            }
+            totalScore = ((travelDist) / (initDist) * 5) + (soFar*5)
+        }
     }
-
+    totalScore = Math.round(totalScore)
+    console.log(`Distance Change: ${endDist - initDist}`)
     console.log(`Total score: ${totalScore}`)
     return [totalScore, ifBox]
 }

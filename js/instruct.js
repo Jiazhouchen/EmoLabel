@@ -10,13 +10,12 @@ function instBtClick(e,complicated) {
     reset_animation('msgBox')
     let secondPage;
     let currentPage = instMsgBox(taskName, complicated)
-    if (complicated) {
+    if (complicated===true) {
         if(taskName === 'Maze') {
-            secondPage = fbMsgBox('fb')
-        } else {
             secondPage = fbMsgBox('fbMaze')
+        } else {
+            secondPage = fbMsgBox('fb')
         }
-
     } else {
         secondPage = fbMsgBox(taskName)
     }
