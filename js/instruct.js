@@ -785,18 +785,20 @@ function instMsgBox(whatMsg, ifTwist) {
         case 'Maze':
             let outM =  `
                 <h1>The Maze Game </h1>
-                <p>In this game, you will be placed at the center of a maze, and your goal is to reach a gift box.</p>
+                <p>In this game, you will be placed at the center of a maze, and your goal is to reach the present.</p>
+		<p> Put a picture of the present here </p>
                 <p>You can use <strong>directional arrow</strong> keys to navigate.</p>
-				<p>However , you will have to navigate 'blind' and you will only see all your movements after time is up. </p>
+				<p>However, you will have to navigate 'blind' and you will only see all your movements after time is up. </p>
                 <p>Each instance of the game is time-limited. You will have more time with larger mazes and less with smaller ones.</p>
-  				<p>The instance will terminate when the time is up or whenever you land on the gift box, whichever is earlier.</p>
-				<p>You earn a large bonus for landing exactly on the gift box.</p>
+  				<p>The instance will terminate when the time is up or when you reach the present, whichever is earlier.</p>
+				<p>You earn a large bonus for reaching the present.</p>
                 `
             if (ifTwist) {
                 outM = outM + `
-                <p>In some mazes however, it is reversed.</p>
-                <p>In these mazes, the gift box is poisonous and you will lose points closer you are to it. You earn most points by staying at the starting point in this case.</p>
-                <p>However, you will not know what kind of maze you are playing. You will have to guess.</p>
+		<br>
+                <p>In some mazes, the present is a trap.</p>
+                <p>In these mazes, you will lose points closer you are to the trap. You earn the most points by getting as far away from the trap as possible.</p>
+                <p>Unfortunately, the trapped presents look the same as normal presents, so you won't know what kind of maze you are playing. You will have to guess.</p>
                 `
             }
             return outM
