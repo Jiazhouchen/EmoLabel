@@ -390,7 +390,7 @@ function fbMsgBox(task) {
             return  `
                 <h1>Gamble Task - Feedback </h1>
                 <p>After you make a response, you will receive a feedback. </p>
-                <p>You will see three different types of feedbacks <strong style="color: #acdb86">Win</strong>, <strong style="color: #db9a86">Lose</strong> or <strong style="color: #ada89c">Safe</strong>.</p>
+                <p>You will see four different types of feedback <strong style="color: #acdb86">Win</strong>, <strong style="color: #db9a86">Lose</strong> or <strong style="color: #ada89c">Safe</strong>.</p>
                 <p>Below are examples of all possible outcomes.</p>
                 <div style="display: flex; flex-direction: row; justify-content: space-around; padding: 1% 0% 1% 0%; width: 80%; margin: auto;">
                     <div class = 'fbWrap'">
@@ -438,7 +438,7 @@ function fbMsgBox(task) {
             return  `
                 <h1>Trust Task - Feedback </h1>
                 <p>After you make a response, you will receive a feedback. </p>
-                <p>You will see three different types of feedbacks <strong style="color: #acdb86">You Share - Your partner Share</strong>, <strong style="color: #db9a86">You Share - Your Partner Keep</strong> or <strong style="color: #ada89c">You Keep - Your Partner Share/Keep</strong>.</p>
+                <p>You will see four different types of feedback <strong style="color: #acdb86">You Share - Your partner Share</strong>, <strong style="color: #db9a86">You Share - Your Partner Keep</strong> or <strong style="color: #ada89c">You Keep - Your Partner Share/Keep</strong>.</p>
                 <p>Below are examples of all possible outcomes.</p>
                 <div style="display: flex; flex-direction: row; justify-content: space-around; padding: 1% 0% 1% 0%; width: 80%; margin: auto;">
                     <div class = 'fbWrap'">
@@ -487,7 +487,7 @@ function fbMsgBox(task) {
             return  `
                 <h1>Math Task - Feedback </h1>
                 <p>After you make a response, you will receive a feedback. </p>
-                <p>You will see two different types of feedbacks <strong style="color: #acdb86">Correct</strong> or <strong style="color: #db9a86">Incorrect</strong>.</p>
+                <p>You will see three different types of feedback <strong style="color: #acdb86">Correct</strong> or <strong style="color: #db9a86">Incorrect</strong>.</p>
                 <p>Below are examples of all possible outcomes.</p>
                 <div style="display: flex; flex-direction: row; justify-content: space-around; padding: 1% 0% 1% 0%; width: 80%; margin: auto;">
                     <div class = 'fbWrap'">
@@ -525,7 +525,7 @@ function fbMsgBox(task) {
             return  `
                 <h1>Maze Task - Feedback </h1>
                 <p>After you make a response, you will receive a feedback. </p>
-                <p>You will see two different types of feedbacks <strong style="color: #acdb86">ARRIVED AT GIFT</strong> or <strong style="color: #db9a86">DID NOT ARRIVE AT GIFT</strong>.</p>
+                <p>You will see three different types of feedback <strong style="color: #acdb86">ARRIVED AT GIFT</strong> or <strong style="color: #db9a86">DID NOT ARRIVE AT GIFT</strong>.</p>
                 <p>Below are examples of all possible outcomes.</p>
                 <div style="display: flex; flex-direction: row; justify-content: space-around; padding: 1% 0% 1% 0%; width: 80%; margin: auto;">
                     <div class = 'fbWrap'">
@@ -563,7 +563,7 @@ function fbMsgBox(task) {
             return `
                 <h1>Feedback </h1>
                 <p>After you make a response, you will receive a feedback. </p>
-                <p>You will see three different types of feedbacks <strong style="color: #acdb86">Win</strong>, <strong style="color: #db9a86">Lose</strong> points or <strong style="color: #ada89c">No change in points</strong>.</p>
+                <p>You will see four different types of feedback <strong style="color: #acdb86">Win</strong>, <strong style="color: #db9a86">Lose</strong> points or <strong style="color: #ada89c">No change in points</strong>.</p>
                 <p>The top points indicate your actual earning, the bottom indicates what you would have gotten if you chose to do the alternative action.</p>
                 <p>Below are examples of all possible outcomes.</p>
                 <div style="display: flex; flex-direction: row; justify-content: space-around; padding: 1% 0% 1% 0%; width: 80%; margin: auto;">
@@ -621,7 +621,7 @@ function fbMsgBox(task) {
             return `
                 <h1>Feedback </h1>
                 <p>After you make a response, you will receive a feedback. </p>
-                <p>You will see three different types of feedbacks <strong style="color: #acdb86">Win</strong> or <strong style="color: #db9a86">Lose</strong> points.</p>
+                <p>You will see four different types of feedback <strong style="color: #acdb86">Win</strong> or <strong style="color: #db9a86">Lose</strong> points.</p>
                 <p>The top points indicate your actual earning, the bottom indicates what you would have gotten if you chose to do the alternative action.</p>
                 <p>In this task, if you move toward the gift, the alternative is if you had stayed away from it, and vice versa. </p>
                 <p>Below are examples of all possible outcomes.</p>
