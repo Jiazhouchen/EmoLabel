@@ -74,7 +74,7 @@
         <form id="participantInfo">
             <label for="id">Participant ID:</label>
             <br>
-            <input type="text" id="id" value="MEG00">
+            <input type="text" id="id" value="MEG10x">
             <br>
             <label for="session">Session:</label>
             <br>
@@ -98,7 +98,7 @@
             <br>
             <label for="scantag">Task Version Control</label>
             <br>
-            <input type="text" id="scantag" value="MEGv1">
+            <input type="text" id="scantag" value="MEGv1.2">
         </form>
     </div>
     <h1 id="loadingText" style="text-align: center;"> Please wait... Experiment Loading ...</h1>
@@ -129,7 +129,7 @@
     presentCalibration = function(divName) {
         const fillIn = document.getElementById(divName)
         fillIn.innerHTML = `
-            <h1 style="margin: auto">Please wait and stay still... We are calibrating the scanner...</h1>
+            <h1 style="margin: auto">Please wait and stay still... We are syncing with the scanner...</h1>
             <button id="startExp" style="max-height: 10vh">Start Experiment</button>
         `
     }

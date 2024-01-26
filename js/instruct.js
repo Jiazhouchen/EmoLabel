@@ -388,7 +388,7 @@ function fbMsgBox(task) {
         case 'Gamble':
             return  `
                 <h1>Gamble Task - Feedback </h1>
-                <p>After you make a response, you will receive a feedback. </p>
+                <p>After you make a response, you will receive feedback. </p>
                 <p>You will see four different types of feedback <strong style="color: #acdb86">Win</strong>, <strong style="color: #db9a86">Lose</strong> or <strong style="color: #ada89c">Safe</strong>.</p>
                 <p>Below are examples of all possible outcomes.</p>
                 <div style="display: flex; flex-direction: row; justify-content: space-around; padding: 1% 0% 1% 0%; width: 80%; margin: auto;">
@@ -436,7 +436,7 @@ function fbMsgBox(task) {
         case 'Trust':
             return  `
                 <h1>Trust Task - Feedback </h1>
-                <p>After you make a response, you will receive a feedback. </p>
+                <p>After you make a response, you will receive feedback. </p>
                 <p>You will see four different types of feedback <strong style="color: #acdb86">You Share - Your partner Share</strong>, <strong style="color: #db9a86">You Share - Your Partner Keep</strong> or <strong style="color: #ada89c">You Keep - Your Partner Share/Keep</strong>.</p>
                 <p>Below are examples of all possible outcomes.</p>
                 <div style="display: flex; flex-direction: row; justify-content: space-around; padding: 1% 0% 1% 0%; width: 80%; margin: auto;">
@@ -485,7 +485,7 @@ function fbMsgBox(task) {
         case 'Math':
             return  `
                 <h1>Math Task - Feedback </h1>
-                <p>After you make a response, you will receive a feedback. </p>
+                <p>After you make a response, you will receive feedback. </p>
                 <p>You will see three different types of feedback <strong style="color: #acdb86">Correct</strong> or <strong style="color: #db9a86">Incorrect</strong>.</p>
                 <p>Below are examples of all possible outcomes.</p>
                 <div style="display: flex; flex-direction: row; justify-content: space-around; padding: 1% 0% 1% 0%; width: 80%; margin: auto;">
@@ -523,7 +523,7 @@ function fbMsgBox(task) {
         case 'Maze':
             return  `
                 <h1>Maze Task - Feedback </h1>
-                <p>After you make a response, you will receive a feedback. </p>
+                <p>After you make a response, you will receive feedback. </p>
                 <p>You will see three different types of feedback <strong style="color: #acdb86">ARRIVED AT GIFT</strong> or <strong style="color: #db9a86">DID NOT ARRIVE AT GIFT</strong>.</p>
                 <p>Below are examples of all possible outcomes.</p>
                 <div style="display: flex; flex-direction: row; justify-content: space-around; padding: 1% 0% 1% 0%; width: 80%; margin: auto;">
@@ -561,7 +561,7 @@ function fbMsgBox(task) {
         case 'fb':
             return `
                 <h1>Feedback </h1>
-                <p>After you make a response, you will receive a feedback. </p>
+                <p>After you make a response, you will receive feedback. </p>
                 <p>You will see four different types of feedback <strong style="color: #acdb86">Win</strong>, <strong style="color: #db9a86">Lose</strong>, <strong style="color: #ada89c">No change in points</strong> or <strong>No response</strong>.</p>
                 <p>The top colored box indicate your actual earning, and the bottom grey box indicates what you would have gotten if you chose to do the other action.</p>
                 <p>Below are examples of all possible outcomes.</p>
@@ -618,7 +618,7 @@ function fbMsgBox(task) {
         case 'fbMaze':
             return `
                 <h1>Feedback </h1>
-                <p>After you make a response, you will receive a feedback. </p>
+                <p>After you make a response, you will receive feedback. </p>
                 <p>You will see four different types of feedback<strong style="color: #acdb86">Win</strong>, <strong style="color: #db9a86">Lose</strong>, <strong style="color: #ada89c">No change in points</strong> or <strong>No response</strong>.</p>
                 <p>The top colored box indicate your actual earning, and the bottom grey box indicates what you would have gotten if you chose to do the alternative action.</p>
                 <p>In this task, if you moved toward the gift box, the alternative action is if you had stayed away from it, and vice versa. </p>
@@ -779,15 +779,15 @@ function instMsgBox(whatMsg, ifTwist) {
             if (ifTwist) {
                 outM = outM + `
 		<br>
-                <p>Sometimes, the gift box contains a skeleton.</p>
+                <p>Sometimes, the gift box has a skull inside.</p>
                 <div class="mzWrap"> 
                     <div class="mzContain" style="justify-content: center">
                         <div class="mzElement" style="background-color: #5a4a78; border: 1px solid #341a63">💀</div>
-                        <p>Skeleton</p>
+                        <p>skull</p>
                     </div>
                 </div>
-                <p>In these cases, all is reversed: you loose points by getting to the gift box and earn the most points by moving far away from the gift box as possible.</p>
-                <p>Unfortunately, the gift box with presents and skeletons look the same, so you won't know what kind of maze you are playing. You will have to guess.</p>
+                <p>In these cases, all is reversed: you loose points by getting to the skull and earn the most points by moving as far away from it as possible.</p>
+                <p>Unfortunately, the gift box with bonus points and skulls look the same, so you won't know what kind of maze you are playing. You will have to guess.</p>
                 `
             }
             return outM

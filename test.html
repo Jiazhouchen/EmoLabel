@@ -178,8 +178,8 @@
     getMazeConfig().then((MazeInfo)=> {
       maze = [{
         type: jsPsychMaze,
-        preset: MazeInfo['20'][0],
-        reverse: false,
+        preset: MazeInfo['20'][3],
+        reverse: true,
         show_step: false,
         limit: 'time',
         timeLimit: 10000,
