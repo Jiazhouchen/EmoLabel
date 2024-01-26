@@ -484,11 +484,13 @@ const jsPsychMaze = (function (jspsych) {
             }
             let cfDist = pythagoreanC((prizePos[0] - cfEnd[0]), (prizePos[1] - cfEnd[1]))
             let cfifBox = false
-            if (cfDist > initDist && !ifBox && !trial.reverse) {
+            if (endDist > initDist && cfDist > initDist && !ifBox) {
+                // here is for when
                 cfEnd = prizePos
                 cfDist = 0
                 cfifBox = true
             }
+
             console.log(`Init Pos:',${initPos}, 'End Pos': ${endPos}, 'Gift Pos': ${prizePos}, 'CF Pos: ${cfEnd}`)
             let [totalScore, ifBbox] = mazeScore(initDist, endDist, travelDist, ifBox, trial.reverse)
             let cfPoints = mazeScore(initDist, cfDist, travelDist, cfifBox, trial.reverse)
@@ -517,7 +519,7 @@ const jsPsychMaze = (function (jspsych) {
             if (trial.preset.c1Pos[0] === trial.endPos[0] && trial.preset.c1Pos[1] === trial.endPos[1]) {
                 noResp = true
                 totalScore = -10
-                cfPoints = 10
+                cfPoints = [10]
                 cSn = 3
             }
 

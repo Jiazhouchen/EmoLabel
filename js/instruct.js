@@ -735,7 +735,7 @@ function instMsgBox(whatMsg, ifTwist) {
                 <p>You will get more points if you get harder questions right, and lose more points if you get easier questions wrong.</p>
                 <p>You have <strong>4 seconds</strong> to respond. </p>
                 `
-       
+
         case 'Trust':
             return `
                 <h1>The Trust Game</h1>
