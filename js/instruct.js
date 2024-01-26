@@ -562,8 +562,8 @@ function fbMsgBox(task) {
             return `
                 <h1>Feedback </h1>
                 <p>After you make a response, you will receive a feedback. </p>
-                <p>You will see four different types of feedback <strong style="color: #acdb86">Win</strong>, <strong style="color: #db9a86">Lose</strong> points or <strong style="color: #ada89c">No change in points</strong>.</p>
-                <p>The top points indicate your actual earning, the bottom indicates what you would have gotten if you chose to do the alternative action.</p>
+                <p>You will see four different types of feedback <strong style="color: #acdb86">Win</strong>, <strong style="color: #db9a86">Lose</strong>, <strong style="color: #ada89c">No change in points</strong> or <strong>No response</strong>.</p>
+                <p>The top colored box indicate your actual earning, and the bottom grey box indicates what you would have gotten if you chose to do the other action.</p>
                 <p>Below are examples of all possible outcomes.</p>
                 <div style="display: flex; flex-direction: row; justify-content: space-around; padding: 1% 0% 1% 0%; width: 80%; margin: auto;">
                     <div class = 'fbWrap'">
@@ -575,7 +575,7 @@ function fbMsgBox(task) {
                                 <p>-1</p>
                             </div>
                         </div>     
-                        <span>You earned 5 points, would have lost 1 point.</span> 
+                        <span>You earn 5 points, would have lost 1 point.</span> 
                     </div>
                     <div class = 'fbWrap'">
                         <div class="fb" style="margin: auto;  opacity: 100%; line-height: 3rem;">
@@ -586,7 +586,7 @@ function fbMsgBox(task) {
                                 <p>3</p>
                             </div>
                         </div>     
-                        <span>You lost -4 points, would have earned 3 points.</span> 
+                        <span>You lose -4 points, would have earned 3 points.</span> 
                     </div>
                     <div class = 'fbWrap'">
                         <div class="fb" style="margin: auto;  opacity: 100%; line-height: 3rem;">
@@ -608,21 +608,20 @@ function fbMsgBox(task) {
                                 <p>4</p>
                             </div>
                         </div>     
-                        <span>No response, lost 10 points, could earn 4 points.</span> 
+                        <span>No response, lose 10 points, could earn 10 points.</span> 
                     </div>
                 </div>
                 
                 
-                <p>If no response is given before timed out, the top number will have <strong style="color: black">BLACK</strong> background and <strong style="color: white;background-color: black">WHITE</strong> font.</p>
-                <p>The bottom number's background color will always be grey</p>
+               
                 `
         case 'fbMaze':
             return `
                 <h1>Feedback </h1>
                 <p>After you make a response, you will receive a feedback. </p>
-                <p>You will see four different types of feedback <strong style="color: #acdb86">Win</strong> or <strong style="color: #db9a86">Lose</strong> points.</p>
-                <p>The top points indicate your actual earning, the bottom indicates what you would have gotten if you chose to do the alternative action.</p>
-                <p>In this task, if you move toward the gift, the alternative is if you had stayed away from it, and vice versa. </p>
+                <p>You will see four different types of feedback<strong style="color: #acdb86">Win</strong>, <strong style="color: #db9a86">Lose</strong>, <strong style="color: #ada89c">No change in points</strong> or <strong>No response</strong>.</p>
+                <p>The top colored box indicate your actual earning, and the bottom grey box indicates what you would have gotten if you chose to do the alternative action.</p>
+                <p>In this task, if you moved toward the gift box, the alternative action is if you had stayed away from it, and vice versa. </p>
                 <p>Below are examples of all possible outcomes.</p>
                 <div style="display: flex; flex-direction: row; justify-content: space-around; padding: 1% 0% 1% 0%; width: 80%; margin: auto;">
                     <div class = 'fbWrap'">
@@ -671,9 +670,7 @@ function fbMsgBox(task) {
                     </div>
                 </div>
                 
-                
-                <p>If no response is given before timed out, the top number will have <strong style="color: black">BLACK</strong> background and <strong style="color: white;background-color: black">WHITE</strong> font.</p>
-                <p>The bottom number's background color will always be grey</p>
+               
                 `
 
     }
@@ -782,7 +779,18 @@ function instMsgBox(whatMsg, ifTwist) {
             let outM =  `
                 <h1>The Maze Game </h1>
                 <p>On each round, you will be placed at the center of a maze, and your goal is to reach the gift box.</p>
-		<p> Put a picture of the present here </p>
+                <div class="mzWrap"> 
+                    <div class="mzContain">
+                        <div class="mzElement" style="background-color: #c8e6d0">👤</div>
+                        <p>You</p>
+                    </div>
+                    <div class="mzContain">
+                        <div class="mzElement" style="background-color: gold; border: 1px solid lightgoldenrodyellow">🎁</div>
+                        <p>Gift Box</p>
+                    </div>
+                    
+		            
+                </div>
                 <p>Use the <strong>direction arrow</strong> keys to navigate.</p>
 				<p>To make it more interesting, you will have to navigate 'blind'. </p>
 				<p>That means that you will need to put in your response, but you will only see all your movements at the end. </p>
@@ -794,6 +802,12 @@ function instMsgBox(whatMsg, ifTwist) {
                 outM = outM + `
 		<br>
                 <p>Sometimes, the gift box contains a skeleton.</p>
+                <div class="mzWrap"> 
+                    <div class="mzContain" style="justify-content: center">
+                        <div class="mzElement" style="background-color: #5a4a78; border: 1px solid #341a63">💀</div>
+                        <p>Skeleton</p>
+                    </div>
+                </div>
                 <p>In these cases, all is reversed: you loose points by getting to the gift box and earn the most points by moving far away from the gift box as possible.</p>
                 <p>Unfortunately, the gift box with presents and skeletons look the same, so you won't know what kind of maze you are playing. You will have to guess.</p>
                 `
@@ -805,10 +819,9 @@ function instMsgBox(whatMsg, ifTwist) {
 				<p>The overall aim of this experiment is to understand what emotions the various games elicit in you. </p>
 				<p>After playing each game, we will repeatedly ask you to report how you feel in that very moment. </p>
                 <p>We will show you a screen with a grid of different emotion labels, as one just interacted with.</p>
-				<p>Please reflect very carefully on how you feel when prompted, and use your <strong>mouse</strong> to select those labels that best fit your current emotion state.</p>
+				<p>Please reflect very carefully on how you feel when prompted, and use your <strong>KEYBOARD</strong> to select those labels that best fit your current emotion state.</p>
 				<p>The emotion labels are organized alphabetically. </p>
-				<p>You will have 15 seconds to choose the labels that fit the best.</p>
-                
+               
                 `
 		case 'emoTrain':
             return `

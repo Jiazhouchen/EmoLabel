@@ -168,8 +168,31 @@
         border-width: 5px;
         padding: 1%;
     }
-    .emoDivIP {
-
+    .mzWrap {
+        display: flex;
+        justify-content: space-between;
+        padding: 1vh 1vw 1vh 1vw;
+        margin: auto;
+        width: 15vw;
+        border: 5px solid darkgrey;
+        border-radius: 10px;
+    }
+    .mzContain {
+        display: flex;
+        margin: auto;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .mzContain p {
+        font-size: 1rem;
+    }
+    .mzElement {
+        margin: auto;
+        background-color: #c8e6d0;
+        overflow: hidden;
+        border-radius: 10px;
+        aspect-ratio: 1 / 1;
+        font-size: 3rem;
     }
     .emoDivIP button {
         background-color: #F0F0F0;
@@ -228,9 +251,9 @@
         tlType = 'behave'
     }
     if (tlType === 'behave') {
-        listOfGames = ['emoTrain','Math','Gamble','Trust','Maze']
+        listOfGames = ['emoRateInfo','emoTrain','Math','Gamble','Trust','Maze']
         //listOfGames = ['Math']
-        //listOfGames = ['emoRateInfo','Maze']
+        //listOfGames = ['','Maze']
     } else {
         listOfGames = ['Gamble', 'Math', 'Gamble II','Math II','Trust','Maze']
     }
@@ -246,7 +269,7 @@
     document.getElementById('finishButton').style.margin = 'auto'
     document.getElementById('finishButton').addEventListener('click',()=> {
         document.getElementById('finishButton').remove()
-        instBtClick('Gamble',complicated)
+        instBtClick('Maze',complicated)
     })
 
 

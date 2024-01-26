@@ -510,7 +510,7 @@ var jsPsychMaze = (function (jspsych) {
                 cSn = 0
             } else if (totalScore <0) {
                 cSn = 1
-            } else if (totalScore = 0) {
+            } else if (totalScore === 0) {
                 cSn = 2
             }
 
