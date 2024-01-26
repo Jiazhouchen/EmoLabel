@@ -1,4 +1,4 @@
-var jsPsychMaze = (function (jspsych) {
+const jsPsychMaze = (function (jspsych) {
     'use strict';
     //
     const info = {
@@ -140,7 +140,7 @@ var jsPsychMaze = (function (jspsych) {
 
         }
 
-        initMazePage(display_element,trial) {
+        initMazePage() {
             let html = ''
             html += `
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
@@ -238,7 +238,6 @@ var jsPsychMaze = (function (jspsych) {
 
 
         setUpMazeResp(display_element,trial) {
-            let keycount = 0;
             let curCount = 0;
             let elapsedTime = 0;
             this.data.sequence = [];
@@ -464,7 +463,7 @@ var jsPsychMaze = (function (jspsych) {
         endMaze(trial) {
             const veil = document.getElementById('veil')
 
-            let aniCon, uChoice, uPoints, cfChoice ,bgColor, cSn
+            let aniCon, cSn
             let noResp = false;
             const endPos = trial.endPos;
             const prizePos = trial.preset.prizePos;
@@ -522,7 +521,7 @@ var jsPsychMaze = (function (jspsych) {
                 cSn = 3
             }
 
-            const fbBox = standardFeedback(uChoice,totalScore,cfChoice,cfPoints[0],noResp,cSn,'',false,this.oldFb)
+            const fbBox = standardFeedback('',totalScore,'',cfPoints[0],noResp,cSn,'',false,this.oldFb)
             fbBox.id = 'fbBox'
 
             veil.appendChild(fbBox)
@@ -763,7 +762,7 @@ function continMaze(tlType,MazeInfo,emoInt) {
         let iCount = 0;
         for (let sb of condiALL) {
             for (let rb of Object.keys(sb)) {
-                for (i=0; i<2; i++) {
+                for (let i=0; i<2; i++) {
                     const mzIrb =sample(sb[rb])
 
                     mazeProb.push(

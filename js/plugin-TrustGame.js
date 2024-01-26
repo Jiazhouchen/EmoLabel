@@ -93,7 +93,7 @@ jsPsychTrust = (function(jspsych) {
             this.drawTrustBio(display_element,trial)
         }
 
-        initTrustPage(display_element, trial) {
+        initTrustPage() {
             let html = ''
             html += `
             <style>
@@ -104,7 +104,7 @@ jsPsychTrust = (function(jspsych) {
                     background-color: #f2f1f0;
                     width: 100%;
                     height: 10%;
-                    border-radius: 20px 20px 0px 0px;
+                    border-radius: 20px 20px 0 0;
                 }
                 div.profile {
                     position: absolute;
@@ -164,7 +164,7 @@ jsPsychTrust = (function(jspsych) {
                     display: flex;
                     top: 30%;
                     left: 25%;
-                    opacity: 0%;
+                    opacity: 0;
                 }
                 .npText * {
                     margin-top: auto;
@@ -179,7 +179,7 @@ jsPsychTrust = (function(jspsych) {
                     width: 80%;
                     top: 50%;
                     left: 10%;
-                    opacity: 0%;
+                    opacity: 0;
                 }
                 .qText * {
                     margin-top: auto;
@@ -450,7 +450,7 @@ jsPsychTrust = (function(jspsych) {
                 document.getElementById('veil').style.display = 'none'
                 photonSwitch('trust-stim')
                 this.data.stimOnset = performance.now()
-                const tKR = this.jsPsych.pluginAPI.getKeyboardResponse({
+                this.jsPsych.pluginAPI.getKeyboardResponse({
                     callback_function: (e) => {
                         this.drawTrustFeedback(e,display_element,trial)
                     },
@@ -468,7 +468,7 @@ jsPsychTrust = (function(jspsych) {
 
         }
 
-        drawTrustFeedback(e,display_element,trial) {
+        drawTrustFeedback(e) {
             photonSwitch('trust-resp')
             this.data.keyPressOnset = performance.now()
             this.jsPsych.pluginAPI.cancelAllKeyboardResponses()

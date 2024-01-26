@@ -108,7 +108,7 @@ jsPsychGamble = (function(jspsych) {
                     allow_held_key: false
                 });
 
-                this.jsPsych.pluginAPI.setTimeout((e) => {
+                this.jsPsych.pluginAPI.setTimeout(() => {
                     this.gamKeypress('')
                 }, this.timing.maxRespTime);
 
@@ -214,7 +214,7 @@ jsPsychGamble = (function(jspsych) {
                     font-size: 5rem;
                     border-radius: 40px;
                     line-height: 5rem;
-                    opacity: 0%;
+                    opacity: 0;
                     transition-timing-function: ease-in;
                     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
                 }
@@ -526,7 +526,6 @@ function gen_trial_contin(t, win_p, ct_type, yoke_por,
             sub_arKeys = [sv];
         }
 
-        let lsSVs = [];
 
         for (let iSV of sub_arKeys) {
             for (let iRV of ar_dict[String(iSV)]) {
@@ -577,8 +576,7 @@ function contingWrapGam(numTrial,winP,ChoiceTypes, YokePorp, EmoInt) {
             p_c.push([ChoiceTypes[ctx],winP[wpx]])
         }
     }
-    t = Math.round(numTrial / p_c.length)
-    let all_info = [];
+    let t = Math.round(numTrial / p_c.length)
     let all_timeline = [];
     for (let az in p_c) {
         const [winX, maxP] = frac_hack(p_c[az][1])
