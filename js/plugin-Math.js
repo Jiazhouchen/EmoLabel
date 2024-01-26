@@ -146,7 +146,7 @@ jsPsychMath = (function(jspsych) {
 
         }
         initMathPage(eq,btxt) {
-            let html = `
+            return `
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik">
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bebas Neue">
             <style>
@@ -226,7 +226,7 @@ jsPsychMath = (function(jspsych) {
             <div class = 'veil' id = 'veil'></div>    
             </body>
             `
-            return html
+
 
         }
 
@@ -255,15 +255,15 @@ jsPsychMath = (function(jspsych) {
             }
 
 
-            let uChoice, cfChoice, cSn, bgColor;
-            const diffScore = Math.round(calScoreMath({
+            let uChoice, cfChoice, cSn;
+            const diffScore = calScoreMath({
                 digitLength: this.data.contingency.digitLength,
                 operationLevel: this.data.contingency.operationLevel,
                 rt: this.data.rt,
                 maxRespTime: this.timing.maxRespTime,
-            }) / 10);
+            });
             const invertScore = Math.round((diffScore - Math.random()*3) -10);
-            this.data.pts = invertScore;
+            this.data.pts = -10;
             this.data.cfPts = diffScore;
             uChoice = 'Did not respond'
             cfChoice = this.data.contingency.fact
@@ -349,7 +349,10 @@ function math_engine() {
 }
 
 function mathEngine(sDl, oDl, Cor) {
-
+    // Not sure why I used these confusing variable names:
+    // sDl is the digits length 1 is 1 2 is 2
+    // oDl is the operation level 0 is +/- and 1 is x
+    // Cor is whether this is TRUE or FALSE equations
 
     let d2, d1, d4, ans, equation
     let d3 = String(Math.ceil(Math.random()*2)) + String(Math.ceil(Math.random()*9))
@@ -402,31 +405,22 @@ function mathEngine(sDl, oDl, Cor) {
         equation = `${d1} ${operation} ${d2} = ${parseInt(ans)+parseInt(dNoise)}`
     }
     // returning Cor just to ensure backward compatibility when something is
-    return [equation, Cor,operation ]
+    return [equation, Cor, operation]
 }
 
 function calScoreMath(dt) {
-    const dScore = ( ((dt.digitLength) * 1.6) + ((dt.operationLevel)*0.8) - (dt.rt / dt.maxRespTime) ) * 25
+    console.log("Math Scoring V2")
+    let rtScore  = (1-Math.pow(2, dt.rt/1000)) / 3
+    if (rtScore > 0) {
+        rtScore = 0
+    } else if (rtScore < -5) {
+        rtScore = -5
+    }
+    let dScore = 1 + ((dt.digitLength-1) * 2) + (dt.operationLevel * 2) + (5 + rtScore)
+    console.log(`rt score: ${rtScore}, total score: ${dScore}`)
+    dScore = Math.floor(dScore)
+    //const dScore = ( ((dt.digitLength) * 1.6) + ((dt.operationLevel)*0.8) - (dt.rt / dt.maxRespTime) ) * 25
     return dScore
-}
-
-function calScoreMathOld(dt) {
-    let score;
-    let dScore = (dt.equation.length-4);
-    if (dt.equation.split(' ').includes('0') ) {
-        dScore = 0;
-    } else if (dt.equation.split(' ').includes('1') ) {
-        dScore = 1;
-    }
-    if (dt.rt === '') {
-        score = 0
-    } else {
-        score =  (5 - (parseInt(dt.rt) / 1000)) +
-            ( (dt.actualCor?1:0)* dScore)*4/10+
-            ( (dt.actualCor?1:0)* dScore*(dt.operation==='×' ? 1:0) * 4/10)
-    }
-
-    return Math.round((score + Number.EPSILON) * 5)
 }
 
 
