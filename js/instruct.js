@@ -735,29 +735,7 @@ function instMsgBox(whatMsg, ifTwist) {
                 <p>You will get more points if you get harder questions right, and lose more points if you get easier questions wrong.</p>
                 <p>You have <strong>4 seconds</strong> to respond. </p>
                 `
-        case 'Gamble II':
-            return `
-                <h1>Gamble Game - Part II</h1>
-                <p>In the second part of the Gamble Game, the instructions are the same as the first part.</p>
-                <p> Your goal is to get as many points as possible. Two options will be presented in each instance: <strong>CERTAIN</strong> or <strong>GAMBLE</strong>.</p>
-                <p> Your performance data will be now compared to participants that have previously played this game.</p>
-                <p>After each instance, you will now be informed about your current performance,
-                ranked amongst <strong>10</strong> previous participants.</p>
-                <p>Your performance score depends on your <strong>total earning, speed of responses, and
-                gamble difficulty </strong>.</p>
-                <p> Your performance in the Gamble Game I or in the Math Game does not impact your ranking in this game.</p>        
-                `
-        case 'Math II':
-            return `
-                <h1>Math Game - Part II</h1>
-                <p>In the second part of the Math Game, the instructions are the same as the first part.</p>
-                <p>You will be asked to answer whether a math equation on display is accurate.</p>
-                <p>Your performance data will be now compared to participants that have previously played this game. </p>
-                <p>After each instance, you will now be informed about your current performance,
-                ranked amongst <strong>10</strong> previous participants.</p>
-                <p>You might notice some discrepancy between your game earning and performance scores.</p>
-                <p>That's because the game also takes how responsive you are and the difficulty of the math equations into account.</p>
-                <p>Your performance in the previous Math Game session or in the Gamble Game does not impact your ranking in this game.</p>      `
+       
         case 'Trust':
             return `
                 <h1>The Trust Game</h1>
