@@ -497,16 +497,14 @@ jsPsychTrust = (function(jspsych) {
 
             ani1.then(() => {
                 const veil = document.getElementById('veil')
-                let uChoice, uPoints, cfChoice, cfPoints,bgColor, cSn
+                let uChoice, cfChoice, cfPoints, cSn
                 let noResp = false
                 if (this.data.respType === 'share' && this.data.contingency.partnerResp === 'share') {
                     // both shared
                     this.data.pts = 2 * this.data.contingency.ptsOffer
                     uChoice = 'Share'
                     cfChoice = 'Keep'
-                    uPoints = this.data.pts
                     cfPoints = this.data.contingency.ptsOffer
-                    bgColor = '#acdb86'
                     cSn = 0
                     this.data.fb = 'share-share'
                 } else if (this.data.respType === 'share' && this.data.contingency.partnerResp === 'keep') {
@@ -514,9 +512,7 @@ jsPsychTrust = (function(jspsych) {
                     this.data.pts = 0
                     uChoice = 'Share'
                     cfChoice = 'Keep'
-                    uPoints = this.data.pts
                     cfPoints = this.data.contingency.ptsOffer
-                    bgColor = '#db9a86'
                     cSn = 1
                     this.data.fb = 'share-keep'
                     // <div >${get_bios(trial.player).name} won ${trial.pts} pts</div>
@@ -525,8 +521,6 @@ jsPsychTrust = (function(jspsych) {
                     this.data.pts = this.data.contingency.ptsOffer
                     uChoice = 'Keep'
                     cfChoice = 'Share'
-                    uPoints = this.data.pts
-                    bgColor = '#d1d1d1'
                     cSn = 2
                     if (this.data.contingency.partnerResp === 'share') {
                         cfPoints = 2 * this.data.contingency.ptsOffer
@@ -539,10 +533,8 @@ jsPsychTrust = (function(jspsych) {
                     //<div >${get_bios(trial.player).name} won ${0} pts</div>
                 } else if (this.data.key === '') {
                     // no response
-                    this.data.pts = 0
-                    bgColor = '#d1d1d1'
+                    this.data.pts = -10
                     uChoice = 'did not respond'
-                    uPoints = 0
                     cSn = 3
                     if (this.data.contingency.partnerResp === 'share') {
                         cfChoice = 'Share'
@@ -556,7 +548,9 @@ jsPsychTrust = (function(jspsych) {
                     noResp = true
                 }
 
-                const ptBox = standardFeedback(uChoice.toUpperCase(),uPoints,cfChoice.toUpperCase(),cfPoints,noResp,cSn,'',false,this.oldFb)
+                const ptBox = standardFeedback(uChoice.toUpperCase(),this.data.pts,
+                    cfChoice.toUpperCase(),cfPoints,
+                    noResp,cSn,'',false,this.oldFb)
                 ptBox.id = 'ptBox'
                 //ptBox.style.backgroundColor = bgColor
                 veil.appendChild(ptBox)

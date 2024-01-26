@@ -321,7 +321,7 @@ jsPsychGamble = (function(jspsych) {
             // too many keys to change, use remap:
             // set up feedback background & box
             let promiseToGo;
-            let cfChoice, cfPoints,bgColor, noResp, cSn, otherSide
+            let cfChoice, cfPoints, noResp, cSn, otherSide
 
             if (e !== '') {
                 noResp = false
@@ -405,7 +405,8 @@ jsPsychGamble = (function(jspsych) {
                 // no response
                 noResp = true
                 this.data.respType = 'noresp'
-                this.data.pts = Math.min(...Object.values(this.data.contingency.opt))
+                //this.data.pts = Math.min(...Object.values(this.data.contingency.opt))
+                this.data.pts = -10
                 cSn = 3
 
                 document.getElementById('optionBox').remove()
@@ -428,7 +429,8 @@ jsPsychGamble = (function(jspsych) {
             //set cSn to undefined for score based feedback
             // cSn = undefined
 
-            const fbBox = standardFeedback(this.data.respType,this.data.pts,cfChoice,cfPoints,noResp,cSn,'',false,this.oldFb)
+            const fbBox = standardFeedback(this.data.respType,this.data.pts,
+                cfChoice,cfPoints,noResp,cSn,'',false,this.oldFb)
             fbBox.id = 'fbBox'
             document.getElementById('veil').appendChild(fbBox)
 
