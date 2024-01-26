@@ -686,20 +686,16 @@ function instMsgBox(whatMsg, ifTwist) {
             return `
                 <h1>Welcome!</h1>
                 <p>In this experiment, we want to understand what kinds of emotions four different games evoke.</p>
-                <p>In each game, you will be able to earn points. You want to earn as many points as possible. </p>
+                <p>In each game, you will be able to earn points. Try to earn as many points as possible. </p>
                 <hr>
-                <p>Before we start, we want you to familiarize yourself with the different games that you will play. </p>
-                <p>We will first show you how you would report your emotions, and then introduce you to the games one-by-one </p>
+                <p>We first show you how to report the emotions you experience during the games, and then we'll show you the games. </p>
                <hr>
-                <p>Don't be worried if you missed something, you can re-do the instructions and practice at the end.</p>
-                <p>When you are ready, press the 'START' button below.</p>
                
                 `
         case 'Gamble':
             let out = `
                 <h1>The Gamble Game</h1>
-                <p>In this game, your goal is to get as many points as possible.</p>
-                <p>You will see two options in each instance, like below: </p>
+                <p>In this game, you will have to make a choice:  </p>
                 <div class="wrap gamWrap">
                     <div style="width: 20%; display: flex; flex-direction: column;justify-content: space-around">
                         <div class="gamInstOpt">5</div>
@@ -709,23 +705,23 @@ function instMsgBox(whatMsg, ifTwist) {
                         <div class="gamInstOpt">0</div>
                     </div>
                 </div>
-                <p>For the option with <strong>ONE</strong> number, you will get the number of points as indicated.</p>
-                <p>For the option with <strong>TWO</strong> numbers, you will randomly get one of those two numbers as your points. </p>
-				<p>Press <strong>'LEFT arrow'</strong> key to choose the left option, and <strong>'RIGHT arrow'</strong> key for the right side one. </p>
-				<p>You will have <strong>4 seconds</strong> to make a response. </p>
+                <p>Press <strong>'LEFT arrow'</strong> key to choose the left option, and the <strong>'RIGHT arrow'</strong> to choose the right option. </p>
+                <p>If you choose the option with <strong>TWO</strong> numbers (here on the left), you will randomly get one of those two numbers as your points. </p>
+                <p>If you choose the option with <strong>ONE</strong> number (here on the right), you will get the number of points as indicated.</p>
+                <p>Your goal is to get as many points as possible.</p>
+				<p>You have <strong>4 seconds</strong> to respond. </p>
                 
                 `
             if (ifTwist) {
                 out = out + `
-                <p>However, in some instances, the computer will alter your choice and move the selection box. </p>
-                <p>You will receive points according to the final chosen option on the screen, either yours or the computer's.</p>
-                `
+                <p>Sometimes, the computer is programmed to alter your choice. </p> 
+                <p>On these trials, you will see the selection box move across from your choice to the other option. </p>                `
             }
             return out
         case 'Math':
             return `
                 <h1>The Math Game</h1>
-                <p>In this game, we will show you math equations, like the one below.</p>
+                <p>In this game, we will show you equations, like this:</p>
                 <div style='
                     font-family: "Rubik", sans-serif;
                     font-size: 5rem;
@@ -737,12 +733,10 @@ function instMsgBox(whatMsg, ifTwist) {
                 '>
                     21 + 23 = 44
                 </div>
-                <p>Your aim is to quickly figure out whether the equation is <strong>TRUE</strong> or <strong>FALSE</strong></p>
-                <p>All the equations contains two numbers, up to 2 digits each.</p>
-                <p>The math operation can be either addition ('+'), subtraction ('-'), or multiplication ('x'). </p>
-                <p>You will get more points if you get harder questions right, and lose more points if you get easier questions wrong.</p>
+                <p>Your aim is to tell us whether the equation is <strong>TRUE</strong> or <strong>FALSE</strong></p>
                 <p>Press <strong>'LEFT arrow'</strong> key to indicate TRUE, and <strong>'RIGHT arrow'</strong> key for FALSE. </p>
-                <p>You will have <strong>5 seconds</strong> to make a response. </p>
+                <p>You will get more points if you get harder questions right, and lose more points if you get easier questions wrong.</p>
+                <p>You have <strong>4 seconds</strong> to respond. </p>
                 `
         case 'Gamble II':
             return `
@@ -770,41 +764,45 @@ function instMsgBox(whatMsg, ifTwist) {
         case 'Trust':
             return `
                 <h1>The Trust Game</h1>
-                <p>In each round of this game you will play with one of three different partners. Each partner will be identified by a distinctive color.</p>
-                <p>On each trial, you and your partner will be both be offered the same initial points. </p>
-				<p>Each of you then choose to either SHARE or KEEP.</p>
-                                <p>If you KEEP, you will get the initial points no matter what your partner decides to do. </p>
-				<p>If you SHARE, then your reward will depend on your partner's choice. </p>
-				<p>If you both SHARE, you both get double the initial points.</p>
-                                <p>If you SHARE and your partner KEEPs, then you will get zero points. Your partner will still get the initial points though.</p>
-		<p>We will tell you how frequently each partner has chosen SHARE. </p>
-                <p>Press <strong>'LEFT arrow'</strong> key to SHARE, and <strong>'RIGHT arrow'</strong> key to KEEP. </p>
-                <p>You will have <strong>3 seconds</strong> to make a response. </p>
+                <p>In this game, you will need to decide whether to trust a partner or not.</p>
+                <p>On each trial, you and your partner will both be offered the same initial points. </p>
+				<p>Each of you then chooses to either SHARE or KEEP.</p>
+                <p>If you KEEP, you get the initial points no matter what your partner decides to do. </p>
+				<p>If you SHARE, then your reward will depend on your partner's choice: </p>
+				    <ul>
+				    <li>If you BOTH share, you BOTH get DOUBLE the initial points.</li>
+                    <li>If you share but your partner does not, then YOU get ZERO points. Your partner still gets the initial points.</li>
+                    </ul>
+                <p>You will play with three different partners. Some partners tend to share a lot, some share rarely. 
+                 We will always tell you how much your current partner tends to share.</p>
+                <p>Press <strong>'LEFT arrow'</strong> to SHARE, and <strong>'RIGHT arrow'</strong> to KEEP. </p>
+                <p>You will have <strong>4 seconds</strong> to decide. </p>
                 `
         case 'Maze':
             let outM =  `
                 <h1>The Maze Game </h1>
-                <p>In this game, you will be placed at the center of a maze, and your goal is to reach the present.</p>
+                <p>On each round, you will be placed at the center of a maze, and your goal is to reach the gift box.</p>
 		<p> Put a picture of the present here </p>
-                <p>You can use <strong>directional arrow</strong> keys to navigate.</p>
-				<p>However, you will have to navigate 'blind' and you will only see all your movements after time is up. </p>
-                <p>Each instance of the game is time-limited. You will have more time with larger mazes and less with smaller ones.</p>
-  				<p>The instance will terminate when the time is up or when you reach the present, whichever is earlier.</p>
-				<p>You earn a large bonus for reaching the present.</p>
+                <p>Use the <strong>direction arrow</strong> keys to navigate.</p>
+				<p>To make it more interesting, you will have to navigate 'blind'. </p>
+				<p>That means that you will need to put in your response, but you will only see all your movements at the end. </p>
+				<p>There is a time-limit, and the round ends when you reach the gift box, or when time is up. </p>
+                <p>You will have more time with larger mazes and less with smaller ones.</p>
+				<p>You earn a  bonus for reaching the gift box.</p>
                 `
             if (ifTwist) {
                 outM = outM + `
 		<br>
-                <p>In some mazes, the present is a trap.</p>
-                <p>In these mazes, you will lose points closer you are to the trap. You earn the most points by getting as far away from the trap as possible.</p>
-                <p>Unfortunately, the trapped presents look the same as normal presents, so you won't know what kind of maze you are playing. You will have to guess.</p>
+                <p>Sometimes, the gift box contains a skeleton.</p>
+                <p>In these cases, all is reversed: you loose points by getting to the gift box and earn the most points by moving far away from the gift box as possible.</p>
+                <p>Unfortunately, the gift box with presents and skeletons look the same, so you won't know what kind of maze you are playing. You will have to guess.</p>
                 `
             }
             return outM
         case 'emoRateInfo':
             return `
                 <h1>Label Your Emotions</h1>
-				<p>The overall aim of this experiment is to understand what emotions the vairous games elicit in you. </p>
+				<p>The overall aim of this experiment is to understand what emotions the various games elicit in you. </p>
 				<p>After playing each game, we will repeatedly ask you to report how you feel in that very moment. </p>
                 <p>We will show you a screen with a grid of different emotion labels, as one just interacted with.</p>
 				<p>Please reflect very carefully on how you feel when prompted, and use your <strong>mouse</strong> to select those labels that best fit your current emotion state.</p>
@@ -819,13 +817,13 @@ function instMsgBox(whatMsg, ifTwist) {
                 <div id='buttonWrap' class='buttonRowIP'> 
 					
 				</div>
-                <p>Please read through them carefully and remember roughly where they are</p>
+                <p>Please read through them carefully and remember roughly where each emotion is.</p>
                 `
 		case 'emoTrain2':
 			return `
 				<h1>Emotion Labeling Practice</h1>
-				<p>For you to familiarize with the full range of labels that are available, we ask you to do a little practice first.</p>
-                <p>We will show you two or three emotions on top and we would like you to find them in the grid below and use your mouse to select them.</p>
+				<p>To familiarize yourself with the full range of labels that are available, we ask you to do a practice first.</p>
+                <p>We will show you two or three emotions on top. Please find each of them in the grid below, using your mouse to select them.</p>
                 <p>Once all listed emotions have been selected, you will see the button to continue. </p>
 				<p>Please try to get a good sense of what emotions labels are available and where they are in the grid. </p>
                 <p>At the end of this practice, you will see what the labeling screen looks like. </p>
