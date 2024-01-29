@@ -84,7 +84,7 @@ jsPsychMath = (function(jspsych) {
             if (trial.twist === true) {
                 trial.operationLevel = 1
             } else if (trial.twist === false) {
-                trial.operationLevel = 1
+                trial.operationLevel = 0
             }
             if (trial.whichSide === '') {
                 trial.whichSide = Math.random() > 0.5 ? 'left':'right';

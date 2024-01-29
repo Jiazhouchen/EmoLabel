@@ -20,6 +20,7 @@
   <script src="js/plugin-Maze.js"></script>
   <script src="js/plugin-Feeding.js"></script>
   <script src="js/plugin-Info.js"></script>
+  <script src="js/plugin-Localize.js"></script>
   <script src="js/table_maze.js"></script>
   <script src="js/genConditions.js"></script>
   <script src="js/studyTimeline.js"></script>
@@ -112,9 +113,9 @@
   })
   if (true) {
     //generate emotion rating pratice here:
-    //window.doingMEG = 'flash'
-    // window.photonLog = [];
-    //photonSwitch()
+    window.doingMEG = 'flash'
+    window.photonLog = [];
+    photonSwitch()
     let storyInfo = getStoryInfo()
 
     stInfo = storyInfo['1']['2']
@@ -127,6 +128,12 @@
         postMajor: 'Thank you for listening!',
         minorMsg: "Press 'enter' or 'space' to start listening.",
         audio: 'audio/'+stInfo.name+'.wav',
+      }
+    ]
+    let local = [
+      {
+        type: jsPsychLocalizer,
+        localType: 'visual',
       }
     ]
     let emoRate = [
@@ -187,7 +194,7 @@
         oldFb: true,
       }
       ]
-       jsPsych.run(maze)
+       jsPsych.run(local)
 
     })
     //jsPsych.run(maze)

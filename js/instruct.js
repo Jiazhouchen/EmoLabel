@@ -563,7 +563,8 @@ function fbMsgBox(task) {
                 <h1>Feedback </h1>
                 <p>After you make a response, you will receive feedback. </p>
                 <p>You will see four different types of feedback <strong style="color: #acdb86">Win</strong>, <strong style="color: #db9a86">Lose</strong>, <strong style="color: #ada89c">No change in points</strong> or <strong>No response</strong>.</p>
-                <p>The top colored box indicate your actual earning, and the bottom grey box indicates what you would have gotten if you chose to do the other action.</p>
+                <p>The top colored box indicates your actual earning. </p> 
+                <p>The bottom grey box indicates what you would have gotten if you had made a different choice. </p>
                 <p>Below are examples of all possible outcomes.</p>
                 <div style="display: flex; flex-direction: row; justify-content: space-around; padding: 1% 0% 1% 0%; width: 80%; margin: auto;">
                     <div class = 'fbWrap'">
@@ -620,8 +621,9 @@ function fbMsgBox(task) {
                 <h1>Feedback </h1>
                 <p>After you make a response, you will receive feedback. </p>
                 <p>You will see four different types of feedback<strong style="color: #acdb86">Win</strong>, <strong style="color: #db9a86">Lose</strong>, <strong style="color: #ada89c">No change in points</strong> or <strong>No response</strong>.</p>
-                <p>The top colored box indicate your actual earning, and the bottom grey box indicates what you would have gotten if you chose to do the alternative action.</p>
-                <p>In this task, if you moved toward the gift box, the alternative action is if you had stayed away from it, and vice versa. </p>
+                <p>The top colored box indicates your actual earning. </p> 
+                <p>The bottom grey box indicates what you would have gotten if you had made a different choice. </p>
+                <p>In this task, if you decided to move toward the gift box, the alternative choice is if you had stayed away from it, and vice versa. </p>
                 <p>Below are examples of all possible outcomes.</p>
                 <div style="display: flex; flex-direction: row; justify-content: space-around; padding: 1% 0% 1% 0%; width: 80%; margin: auto;">
                     <div class = 'fbWrap'">

@@ -23,7 +23,10 @@ function getMEGContingency(sess, e) {
     if (type === 'localizer') {
         runComp = [
             {
-
+                type: jsPsychLocalizer,
+                localType: n,
+                audioNumThres: 20,
+                visualNumThres: 20,
             }
         ]
     }

@@ -173,37 +173,26 @@ const jsPsychInfo = (function (jspsych) {
 
         DoCountdown(audioIP) {
             this.data.taskType += 'countdown'
-            this.audioSignature = document.createElement("audio");
-            this.audioSignature.controls = false;
-            this.audioSignature.preload = 'auto';
-            this.audioSignature.src = 'audio/1000Hz_30ms.wav';
 
             this.jsPsych.pluginAPI.getKeyboardResponse({
                 callback_function: () => {
-
-                    if (audioIP) {
-                        this.audioSignature.play().then(()=> {
-                            document.getElementById('minorMsg').childNodes[0].textContent = 'listen to the story now'
-                            document.getElementById('counterDowner').style.display = this.counterDisplayText
-                            let endTime = this.countdownDuration;
-                            let elapsedTime = 0;
+                    document.getElementById('minorMsg').childNodes[0].textContent = 'listen to the story now'
+                    document.getElementById('counterDowner').style.display = this.counterDisplayText
+                    let endTime = this.countdownDuration;
+                    let elapsedTime = 0;
+                    document.getElementById('cDt').textContent = String(endTime - elapsedTime)
+                    audioIP.play().then(()=> {
+                        photonSwitch('audio-beg')
+                        let intervalIndex = setInterval(() => {
+                            elapsedTime += 1
                             document.getElementById('cDt').textContent = String(endTime - elapsedTime)
-                            audioIP.play().then(()=> {
-                                photonSwitch('audio-beg')
-                                let intervalIndex = setInterval(() => {
-                                    elapsedTime += 1
-                                    document.getElementById('cDt').textContent = String(endTime - elapsedTime)
-                                    if (endTime === elapsedTime) {
-                                        clearInterval(intervalIndex)
-                                        photonSwitch('audio-end')
-                                        this.timerOver()
-                                    }
-                                },1000)
-                            })
-                        })
-
-
-                    }
+                            if (endTime === elapsedTime) {
+                                clearInterval(intervalIndex)
+                                photonSwitch('audio-end')
+                                this.timerOver()
+                            }
+                        },1000)
+                    })
                 },
                 valid_responses: [' ','enter','j','f'],
                 rt_method: 'performance',
@@ -219,7 +208,6 @@ const jsPsychInfo = (function (jspsych) {
             if (audio) {
                 audio.pause()
             }
-            this.audioSignature.play()
             document.getElementById('counterDowner').style.display = 'none'
             document.getElementById('majorMsg').innerHTML = this.postMajor
             document.getElementById('minorMsg').innerHTML = `
