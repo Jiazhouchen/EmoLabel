@@ -462,94 +462,98 @@ const jsPsychMaze = (function (jspsych) {
         }
 
         endMaze(trial) {
-            const veil = document.getElementById('veil')
+            if (this.trialComplete === false) {
+                this.trialComplete = true
+                const veil = document.getElementById('veil')
 
-            let aniCon, cSn
-            let noResp = false;
-            const endPos = trial.endPos;
-            const prizePos = trial.preset.prizePos;
-            const initPos = trial.preset.c1Pos;
+                let aniCon, cSn
+                let noResp = false;
+                const endPos = trial.endPos;
+                const prizePos = trial.preset.prizePos;
+                const initPos = trial.preset.c1Pos;
 
-            const ifBox = (endPos[0] === prizePos[0] && endPos[1] === prizePos[1]);
-            const initDist = pythagoreanC( (prizePos[0] - initPos[0]), (prizePos[1] - initPos[1]));
-            const endDist = pythagoreanC( (prizePos[0] - endPos[0]), (prizePos[1] - endPos[1]) )
-            const travelDist = pythagoreanC((endPos[0] - initPos[0]), (endPos[1] - initPos[1]))
-            let cfEnd = [
-                initPos[0] - (endPos[0] - initPos[0]),
-                initPos[1] - (endPos[1] - initPos[1])
-            ]
-            for (let i in [0,1]) {
-                if (cfEnd[i] < 0) {
-                    cfEnd[i] = Math.abs(cfEnd[i]) + trial.preset.cells_h
+                const ifBox = (endPos[0] === prizePos[0] && endPos[1] === prizePos[1]);
+                const initDist = pythagoreanC( (prizePos[0] - initPos[0]), (prizePos[1] - initPos[1]));
+                const endDist = pythagoreanC( (prizePos[0] - endPos[0]), (prizePos[1] - endPos[1]) )
+                const travelDist = pythagoreanC((endPos[0] - initPos[0]), (endPos[1] - initPos[1]))
+                let cfEnd = [
+                    initPos[0] - (endPos[0] - initPos[0]),
+                    initPos[1] - (endPos[1] - initPos[1])
+                ]
+                for (let i in [0,1]) {
+                    if (cfEnd[i] < 0) {
+                        cfEnd[i] = Math.abs(cfEnd[i]) + trial.preset.cells_h
+                    }
                 }
-            }
-            let cfDist = pythagoreanC((prizePos[0] - cfEnd[0]), (prizePos[1] - cfEnd[1]))
-            let cfifBox = false
-            if (endDist > initDist && cfDist > initDist && !ifBox) {
-                // here is for when
-                cfEnd = prizePos
-                cfDist = 0
-                cfifBox = true
-            }
+                let cfDist = pythagoreanC((prizePos[0] - cfEnd[0]), (prizePos[1] - cfEnd[1]))
+                let cfifBox = false
+                if (endDist > initDist && cfDist > initDist && !ifBox) {
+                    // here is for when
+                    cfEnd = prizePos
+                    cfDist = 0
+                    cfifBox = true
+                }
 
-            console.log(`Init Pos:',${initPos}, 'End Pos': ${endPos}, 'Gift Pos': ${prizePos}, 'CF Pos: ${cfEnd}`)
-            let [totalScore, ifBbox] = mazeScore(initDist, endDist, travelDist, ifBox, trial.reverse)
-            let cfPoints = mazeScore(initDist, cfDist, travelDist, cfifBox, trial.reverse)
+                console.log(`Init Pos:',${initPos}, 'End Pos': ${endPos}, 'Gift Pos': ${prizePos}, 'CF Pos: ${cfEnd}`)
+                let [totalScore, ifBbox] = mazeScore(initDist, endDist, travelDist, ifBox, trial.reverse)
+                let cfPoints = mazeScore(initDist, cfDist, travelDist, cfifBox, trial.reverse)
 
-            if (ifBbox > 0) {
-                aniCon = [
-                    {scale:0.9},
-                    {scale:2},
-                ]
-            } else {
-                aniCon = [
-                    {opacity:'100%'},
-                    {opacity: '0%'}
-                ]
-            }
+                if (ifBbox > 0) {
+                    aniCon = [
+                        {scale:0.9},
+                        {scale:2},
+                    ]
+                } else {
+                    aniCon = [
+                        {opacity:'100%'},
+                        {opacity: '0%'}
+                    ]
+                }
 
-            if (totalScore > 0) {
-                cSn = 0
-            } else if (totalScore <0) {
-                cSn = 1
-            } else if (totalScore === 0) {
-                cSn = 2
-            }
-
-
-            if (trial.preset.c1Pos[0] === trial.endPos[0] && trial.preset.c1Pos[1] === trial.endPos[1]) {
-                noResp = true
-                totalScore = -10
-                cfPoints = [10]
-                cSn = 3
-            }
-
-            const fbBox = standardFeedback('',totalScore,'',cfPoints[0],noResp,cSn,'',false,this.oldFb)
-            fbBox.id = 'fbBox'
-
-            veil.appendChild(fbBox)
-            const prizePromise = document.getElementById('mzPrize').animate(aniCon,{
-                duration:this.timing.boxZoom,fill: 'forwards',delay:0,iterations:1
-            })
+                if (totalScore > 0) {
+                    cSn = 0
+                } else if (totalScore <0) {
+                    cSn = 1
+                } else if (totalScore === 0) {
+                    cSn = 2
+                }
 
 
-            prizePromise.finished.then(()=> {
-                removeEventListener("resize", resize_maze);
-                veil.style.display = 'flex'
-                resolveAfter(this.timing.preFb,'',this.jsPsych).then(()=> {
-                    this.jsPsych.pluginAPI.clearAllTimeouts()
-                    this.jsPsych.pluginAPI.cancelAllKeyboardResponses()
-                    fbBox.style.opacity = '100%'
-                    photonSwitch('maze-fbOn')
-                    this.data.fbOnset = performance.now()
-                    resolveAfter(this.timing.fbDur,'',this.jsPsych).then(()=> {
+                if (trial.preset.c1Pos[0] === trial.endPos[0] && trial.preset.c1Pos[1] === trial.endPos[1]) {
+                    noResp = true
+                    totalScore = -10
+                    cfPoints = [10]
+                    cSn = 3
+                }
+
+                const fbBox = standardFeedback('',totalScore,'',cfPoints[0],noResp,cSn,'',false,this.oldFb)
+                fbBox.id = 'fbBox'
+
+                veil.appendChild(fbBox)
+                const prizePromise = document.getElementById('mzPrize').animate(aniCon,{
+                    duration:this.timing.boxZoom,fill: 'forwards',delay:0,iterations:1
+                })
+
+
+                prizePromise.finished.then(()=> {
+                    removeEventListener("resize", resize_maze);
+                    veil.style.display = 'flex'
+                    resolveAfter(this.timing.preFb,'',this.jsPsych).then(()=> {
                         this.jsPsych.pluginAPI.clearAllTimeouts()
                         this.jsPsych.pluginAPI.cancelAllKeyboardResponses()
-                        this.data.endTime = performance.now()
-                        this.jsPsych.finishTrial(this.data)
+                        fbBox.style.opacity = '100%'
+                        photonSwitch('maze-fbOn')
+                        this.data.fbOnset = performance.now()
+                        resolveAfter(this.timing.fbDur,'',this.jsPsych).then(()=> {
+                            this.jsPsych.pluginAPI.clearAllTimeouts()
+                            this.jsPsych.pluginAPI.cancelAllKeyboardResponses()
+                            this.data.endTime = performance.now()
+                            this.jsPsych.finishTrial(this.data)
+                        })
                     })
                 })
-            })
+            }
+
 
         }
     }
