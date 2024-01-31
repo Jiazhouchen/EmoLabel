@@ -211,7 +211,7 @@
             document.getElementById('display_element').style.display = 'inline'
             runPracticeProcedure('Maze')
         }
-        configMaze()
+        //configMaze()
         async function configMaze() {
             const MazeInfo = await getMazeConfig()
             window.MazeInfo = MazeInfo;
@@ -423,9 +423,9 @@
 
         function genMazeUpdate() {
             ensure_uid_set(5000).then( () => {
-                for (let gi of [10, 15, 20, 25, 30]) {
+                for (let gi of [20]) {
                     let gx = {};
-                    for (let i = 0; i < 15; i++) {
+                    for (let i = 0; i < 30; i++) {
                         const mz = aMazeMe(gi)
                         dt = {
                             cells_w: mz.cells_w,
@@ -434,7 +434,7 @@
                         }
                         gx[i] = dt
                     }
-                    db.collection('MazeConfig2').doc(String(gi)).set(gx)
+                    db.collection('MazeConfig').doc(String(gi)).set(gx)
                     document.getElementById('updateT').textContent += `${gi} done`
                 }
 
