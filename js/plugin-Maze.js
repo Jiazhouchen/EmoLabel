@@ -69,6 +69,7 @@ const jsPsychMaze = (function (jspsych) {
             this.timing.boxZoom = 500
             this.keyMap = new keyMap()
             this.data = initData('Maze')
+            this.trialComplete = false
         }
         trial(display_element, trial) {
             this.jsPsych.pluginAPI.cancelAllKeyboardResponses()

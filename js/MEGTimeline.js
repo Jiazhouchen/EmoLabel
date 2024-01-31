@@ -65,12 +65,17 @@ function MEGTaskContingency(MazeInfo, sess, n) {
                 break;
             case 'Math':
                 taskIns.type = jsPsychMath
+                taskIns.whichSide = 'left'
                 break;
             case 'Trust':
                 taskIns.type = jsPsychTrust
                 taskIns.displayBio =  0
-                taskIns.share = x.twist === 'false'
                 taskIns.player = x.diff==='easy'?0:2
+                if (x.diff === 'easy') {
+                    taskIns.share = x.twist !== 'true'
+                } else {
+                    taskIns.share = x.twist === 'true'
+                }
                 taskIns.pts = 5
                 break;
             case 'Gamble':

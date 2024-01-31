@@ -51,7 +51,7 @@ jsPsychTrust = (function(jspsych) {
             },
             oldFb: {
                 type: jspsych.ParameterType.BOOL,
-                default: false,
+                default: true,
             }
         }
     }
@@ -601,22 +601,22 @@ function get_bios(num) {
             name: 'Jeff',
             color: '#ad7547',
             colorLight: '#e0cdbc',
-            shareP: 89,
-            bio: "depreciated",
+            shareP: 88,
+            bio: "High",
         },
         {
             name: 'Matt',
             color: '#66bbcc',
             colorLight: '#c8d8db',
             shareP: 55,
-            bio: "depreciated",
+            bio: "Mid",
         },
         {
             name: 'Alex',
             color: '#4a26bf',
             colorLight: '#bab5c9',
-            shareP: 20,
-            bio: "depreciated",
+            shareP: 12,
+            bio: "Low",
         },
     ]
 
