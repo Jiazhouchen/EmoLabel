@@ -225,13 +225,13 @@
     <div id='display_element' class='jsPsychDE' style="display: none"></div>
 </body>
 <script>
-    //window.doingMEG = 'flash'
-    //window.photonLog = [];
+    window.doingMEG = 'flash'
+    window.photonLog = [];
     photonSwitch()
     const indexURLPara = new URLSearchParams(window.location.search)
     let PROLIFIC_PID = indexURLPara.get('PROLIFIC_PID')
     if (!PROLIFIC_PID) {
-        PROLIFIC_PID = '00001'
+        PROLIFIC_PID = 'MEG101'
     }
     let collectionName = indexURLPara.get('collectionName')
     let complicated = indexURLPara.get('complicated')
@@ -243,6 +243,9 @@
     } else {
         complicated = complicated==='true'
     }
+    if (!collectionName) {
+        collectionName = 'MEGDATA'
+    } 
     let global_config;
     let practiceCounter = 0;
     let listOfGames;

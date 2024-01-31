@@ -55,7 +55,7 @@ const jsPsychRateEmotion = (function (jspsych) {
         fade: 0,
         intro: 1000,
         feelTxt: 2000,
-        maxRespTime: 15000,
+        maxRespTime: 20000,
       };
       this.keyMap = new keyMap()
       this.data = {

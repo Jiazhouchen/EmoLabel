@@ -671,7 +671,17 @@ class keyMap {
             this.keymap.set('enter','confirm')
         } else if (this.expType === 'MEG') {
             // MEG set up
-            this.keymap.set('1','up')
+            this.keymap.set('2','up')
+            this.keymap.set('3','down')
+            this.keymap.set('1','left')
+            this.keymap.set('4','right')
+
+            this.keymap.set('6','select')
+            this.keymap.set('8','confirm')
+            this.keymap.set('0','confirm')
+            this.keymap.set('0','confirm')
+        } else {
+	    this.keymap.set('1','up')
             this.keymap.set('2','down')
             this.keymap.set('6','left')
             this.keymap.set('7','right')
@@ -680,7 +690,7 @@ class keyMap {
             this.keymap.set('4','confirm')
             this.keymap.set('8','confirm')
             this.keymap.set('9','confirm')
-        }
+	}
     }
 
     allowedKeys(allowedList) {

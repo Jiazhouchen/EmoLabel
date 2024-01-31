@@ -54,6 +54,7 @@ function MEGTaskContingency(MazeInfo, sess, n) {
             'type': '',
             'difficulty': x.diff,
             'twist': x.twist,
+	    'oldFb': true,
         }
         switch (x.type) {
             case 'Maze':
